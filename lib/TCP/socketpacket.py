@@ -54,7 +54,7 @@ def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data 
             logger.info(msg)
             sock.close()
     
-    except MemoryError as exc:
+    except (MemoryError,TypeError) as exc:
         msg = str(exc)
         msg += "Could not handle the packet size.EXITING!!!"
         logger.critical(msg)
