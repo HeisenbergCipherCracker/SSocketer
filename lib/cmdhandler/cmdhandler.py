@@ -4,7 +4,7 @@ import sys
 
 sys.path.append(os.getcwd())
 
-
+from extra.versioninfo.Version import VERSION
 
 def cmdhandler():
     """
@@ -20,6 +20,7 @@ def cmdhandler():
     parser.add_argument("--range","-r",type=int,help="specify the attack range number",required=False)
     parser.add_argument("--output","-o",help="get result as an output txt file")
     parser.add_argument("--protocol","--proto",help="specify the protocol of the packet sending",default="TCP",required=False)
+    parser.add_argument("--version",help="display the version",action='version',version=f"%(prog)s {VERSION}")
     args = parser.parse_args()
     target = args.url
     port = args.port
