@@ -9,6 +9,7 @@ from lib.cmdhandler.cmdhandler import request
 from lib.request.get.GET import get_request
 from lib.logger.log import logger
 from lib.cmdhandler.cmdhandler import nmap
+import nmap as _nmap
 import threading
 import os
 import sys
@@ -58,8 +59,12 @@ if __name__ == "__main__":
     except ConnectionResetError as exc:
         logger.critical("Connection reset\n%s"%str(exc))
     
+    except _nmap.nmap.PortScannerError():
+        logger.critical("PortScannerError.cannot run nmap right now.")
+    
     except:
         traceback.print_exc()
+
 
     
     finally:
