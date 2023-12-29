@@ -1,9 +1,16 @@
 import logging
 import colorlog
+import os
+import sys
+
+sys.path.append(os.getcwd())
 
 #Reference:https://stackoverflow.com/questions/39718895/python-multiple-logger-for-multiple-modules
 logger = logging.getLogger('ssocketerlogs')
+
 logger.setLevel(logging.INFO)
+
+    
 
 formatter = colorlog.ColoredFormatter(
     "[%(asctime)s] [%(log_color)s%(levelname)s%(reset)s] %(log_color)s%(message)s%(reset)s",
