@@ -2,6 +2,7 @@ from lib.TCP.socketpacket import send_socket_with_specified_size
 from lib.TCP.socketpacket import send_socket as send_socket_tcp
 from lib.udp.UDP import send_socket_udp
 from lib.udp.UDP import send_socket_with_specified_size_udp
+from lib.result.result import result
 from lib.extra.banner import banner 
 from lib.cmdhandler.cmdhandler import protocol
 import threading
@@ -33,6 +34,7 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+        result()
     
     except SystemExit:
         print("QUITTING!!!")

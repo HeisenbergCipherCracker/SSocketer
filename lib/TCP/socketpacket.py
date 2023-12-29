@@ -30,10 +30,14 @@ def send_socket(address:tuple=(target,port),data:bytes=data if data is not None 
             msg = f"\n sent data to the server:{address[0]} via port {address[1]}"
             msg += "Could receive data: %s"%datarec.decode() if isinstance(datarec,bytes) else datarec
             logger.info(msg)
+            tcp_data_cap = [datarec]
             sock.close()
     except MemoryError:
         logger.critical("Out of memory")
         raise SystemExit
+    
+    finally:
+        return tcp_data_cap
     
 
 
@@ -58,6 +62,7 @@ def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data 
             count += 1
             msg = f"\n [{i}] Sent packet:{data.__sizeof__()} bytes to target:{address[0]},port:{address[1]}"
             msg += "\nCould receive data: %s"%datarec.decode() if isinstance(datarec,bytes) else datarec
+            caps = [datarec]
             logger.info(msg)
             sock.close()
     
@@ -66,6 +71,12 @@ def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data 
         msg += "\nCould not handle the packet size.EXITING!!!"
         logger.critical(msg)
         raise SystemExit
+    
+    finally:
+        return caps
+
+
+
     
 
 
