@@ -45,6 +45,9 @@ if __name__ == "__main__":
     except BrokenPipeError:
         logger.critical("Could not handle that packet size any more. use the default setting.")
     
+    except ConnectionResetError as exc:
+        logger.critical("Connection reset\n%s"%str(exc))
+    
     except:
         traceback.print_exc()
 
