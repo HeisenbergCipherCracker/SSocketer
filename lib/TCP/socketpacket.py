@@ -1,5 +1,8 @@
 import os
 import sys
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE,SIG_DFL)
+#Reference:https://stackoverflow.com/questions/11866792/how-to-prevent-errno-32-broken-pipe
 
 sys.path.append(os.getcwd())
 from lib.TCP.tcpsocketinit import TCP_sock_init
@@ -11,9 +14,13 @@ from lib.cmdhandler.cmdhandler import target
 from lib.cmdhandler.cmdhandler import data
 from lib.cmdhandler.cmdhandler import Range as _range
 
+caps = None
+tcp_data_cap = None
+
 def send_socket(address:tuple=(target,port),data:bytes=data if data is not None else b'X'):
     try:
-        for i in range(_range):
+        global tcp_data_cap
+        for i in range(_range if _range is not None else 1):
             """
             >>> address =('scanme.org',22)
 
@@ -37,14 +44,16 @@ def send_socket(address:tuple=(target,port),data:bytes=data if data is not None 
         raise SystemExit
     
     finally:
-        return tcp_data_cap
+        pass
+        # return tcp_data_cap
     
 
 
 def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data if data is not None else b"X",size:int=size):
     count = 0
     try:
-        for i in range(_range+1):
+        global caps
+        for i in range(_range+1 if _range is not None else 1):
             """
             >>> address =('scanme.org',22)
 
@@ -73,7 +82,8 @@ def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data 
         raise SystemExit
     
     finally:
-        return caps
+        # return caps
+        pass
 
 
 

@@ -5,6 +5,8 @@ from lib.udp.UDP import send_socket_with_specified_size_udp
 from lib.result.result import result
 from lib.extra.banner import banner 
 from lib.cmdhandler.cmdhandler import protocol
+from lib.cmdhandler.cmdhandler import outfile
+from lib.logger.log import logger
 import threading
 import os
 import sys
@@ -34,10 +36,14 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-        result()
+        if outfile is not None:
+            result()
     
     except SystemExit:
         print("QUITTING!!!")
+    
+    except BrokenPipeError:
+        logger.critical("Could not handle that packet size any more. use the default setting.")
     
     except:
         traceback.print_exc()

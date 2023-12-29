@@ -23,6 +23,6 @@ def get_request(address:tuple=(target,port)):
     finally:
         logger.info(data.decode())
     
-print(get_request(("scanme.org",22)))
+# print(get_request(("scanme.org",22)))
 
 

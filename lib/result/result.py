@@ -8,6 +8,9 @@ from lib.TCP.socketpacket import send_socket_with_specified_size
 def result(filename=outfile):
 
     with open(filename, 'w') as file:
-        file.write(send_socket_with_specified_size()[0].decode())
+        file.write(send_socket_with_specified_size()[0].decode()) if send_socket_with_specified_size() is not None else "None" 
 
-result()
+
+
+
+# result()
