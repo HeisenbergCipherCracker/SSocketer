@@ -14,7 +14,7 @@ def get_request(address=tuple):
         sock = TCP_sock_init()
         sock.connect(address)
         sock.sendall(req.encode())
-        data = sock.recv(1024)
+        data = sock.recv(4096)
         sock.close()
     
     finally:
