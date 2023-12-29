@@ -23,6 +23,7 @@ def cmdhandler():
     parser.add_argument("--version",help="display the version",action='version',version=f"%(prog)s {VERSION}")
     parser.add_argument("--request","-req",help="send couple of requests type,example : (--request POST)",required=False,type=str)
     parser.add_argument("--content",help="add content for the requests that will be sent",required=False)
+    parser.add_argument("--nmap",help="use nmap to find the target open ports",required=False,action="store_true")
     args = parser.parse_args()
     target = args.url
     port = args.port
@@ -33,6 +34,7 @@ def cmdhandler():
     protocol = args.protocol
     request = args.request
     content = args.content
+    nmap = args.nmap
     
     return (
         target
@@ -43,6 +45,7 @@ def cmdhandler():
         ,outfile,
         protocol,
         request,
-        content)
+        content,
+        nmap)
 
-target, port, size, data, Range, outfile,protocol,request,content = cmdhandler()
+target, port, size, data, Range, outfile,protocol,request,content,nmap = cmdhandler()

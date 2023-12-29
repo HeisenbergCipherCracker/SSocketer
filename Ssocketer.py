@@ -8,6 +8,7 @@ from lib.cmdhandler.cmdhandler import outfile
 from lib.cmdhandler.cmdhandler import request
 from lib.request.get.GET import get_request
 from lib.logger.log import logger
+from lib.cmdhandler.cmdhandler import nmap
 import threading
 import os
 import sys
@@ -31,8 +32,13 @@ def main():
             _.start()
             _.join()
     
+    if nmap is not None:
+        from lib.pynmap.pynmaps import pynmap
+        pynmap()
+    
     elif request == "GET":
         get_request()
+
     
 
 
