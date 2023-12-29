@@ -21,6 +21,8 @@ def cmdhandler():
     parser.add_argument("--output","-o",help="get result as an output txt file")
     parser.add_argument("--protocol","--proto",help="specify the protocol of the packet sending",default="TCP",required=False)
     parser.add_argument("--version",help="display the version",action='version',version=f"%(prog)s {VERSION}")
+    parser.add_argument("--request","-req",help="send couple of requests type,example : (--request POST)",required=False)
+    parser.add_argument("--content",help="add content for the requests that will be sent",required=False)
     args = parser.parse_args()
     target = args.url
     port = args.port
@@ -29,6 +31,8 @@ def cmdhandler():
     Range = args.range
     outfile = args.output
     protocol = args.protocol
+    request = args.request
+    content = args.content
     
     return (
         target
@@ -37,6 +41,8 @@ def cmdhandler():
         ,data
         ,Range
         ,outfile,
-        protocol,)
+        protocol,
+        request,
+        content)
 
-target, port, size, data, Range, outfile,protocol = cmdhandler()
+target, port, size, data, Range, outfile,protocol,request,content = cmdhandler()

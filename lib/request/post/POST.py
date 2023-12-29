@@ -3,11 +3,15 @@ import os
 import sys
 sys.path.append(os.getcwd())
 from lib.TCP.tcpsocketinit import TCP_sock_init
+from lib.cmdhandler.cmdhandler import target
+from lib.cmdhandler.cmdhandler import port
+from lib.cmdhandler.cmdhandler import content
+from lib.logger.log import logger
 
 def decoy():
     pass
 
-def POST(address,content):
+def POST(address=(target,port),content=content if content is not None else "X"):
     try:
         request_body = content
         content_length = len(request_body)
@@ -19,4 +23,4 @@ def POST(address,content):
         sock.close()
     
     finally:
-        return data.decode()
+        logger.info(data.decode())
