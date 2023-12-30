@@ -1,3 +1,10 @@
+import sys
+
+try:
+    __import__("lib")
+except (ImportError,ModuleNotFoundError) as exc:
+    sys.exit("[!]Wrong installation:%s "%str(exc))
+
 from lib.TCP.socketpacket import send_socket_with_specified_size
 from lib.TCP.socketpacket import send_socket as send_socket_tcp
 from lib.udp.UDP import send_socket_udp
@@ -12,7 +19,6 @@ from lib.cmdhandler.cmdhandler import nmap
 import nmap as _nmap
 import threading
 import os
-import sys
 import traceback
 
 
