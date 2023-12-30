@@ -68,6 +68,10 @@ if __name__ == "__main__":
     except _nmap.nmap.PortScannerError():
         logger.critical("PortScannerError.cannot run nmap right now.")
     
+    except KeyboardInterrupt:
+        logger.error("User exit.")
+        sys.exit(0)
+    
     except:
         traceback.print_exc()
 

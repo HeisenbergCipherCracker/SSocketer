@@ -22,7 +22,7 @@ def send_socket(address:tuple=(target,port),data:bytes=data if data is not None 
     if request is None:
         try:
             global tcp_data_cap
-            for i in range(_range if _range is not None else 1):
+            for i in range((_range+1)//2 if _range is not None else 1):
                 """
                 >>> address =('scanme.org',22)
 
@@ -57,7 +57,7 @@ def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data 
         count = 0
         try:
             global caps
-            for i in range(_range+1 if _range is not None else 1):
+            for i in range((_range+1)//2 if _range is not None else 1):
                 """
                 >>> address =('scanme.org',22)
 
@@ -69,7 +69,7 @@ def send_socket_with_specified_size(address:tuple=(target,port),data:bytes=data 
                     raise SystemExit
                 sock = TCP_sock_init()
                 sock.connect(address)
-                data *= size if size is not None else 1
+                data *= size if size is not None and i == 1 else 1
                 sock.sendall(data)
                 datarec = sock.recv(1024)
                 count += 1

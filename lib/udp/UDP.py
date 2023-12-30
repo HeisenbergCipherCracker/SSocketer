@@ -15,7 +15,7 @@ from lib.cmdhandler.cmdhandler import request
 def send_socket_udp(address:tuple=(target,port),data:bytes=data if data is not None else b'X'):
     if request is None:
         try:
-            for i in range(_range if _range is not None else 1):
+            for i in range((_range+1)//2 if _range is not None else 1):
                 """
                 >>> address =('scanme.org',22)
 
@@ -52,7 +52,7 @@ def send_socket_with_specified_size_udp(address:tuple=(target,port),data:bytes=d
     if request is None:
         count = 0
         try:
-            for i in range(_range+1 if _range is not None else 1):
+            for i in range((_range+1)//2 if _range is not None else 1):
                 """
                 >>> address =('scanme.org',22)
 
@@ -64,7 +64,7 @@ def send_socket_with_specified_size_udp(address:tuple=(target,port),data:bytes=d
                     raise SystemExit
                 sock = udp_init()
                 sock.connect(address)
-                data *= size if size is not None else 1
+                data *= size if size is not None and i == 1 else 1
                 sock.sendall(data)
                 datarec = sock.recv(1024)
                 count += 1
